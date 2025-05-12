@@ -38,7 +38,7 @@ const Index = () => {
         
         {/* Subheading */}
         <p className="text-muted-foreground max-w-md mx-auto mb-10 text-lg">
-          We're working on something amazing. Be the first to know when we launch.
+          We're building something amazing. Be the first to know when we launch.
         </p>
         
         {/* Newsletter form */}
@@ -48,7 +48,7 @@ const Index = () => {
         
         {/* Footer */}
         <div className="text-muted-foreground/60 text-sm">
-          © {new Date().getFullYear()} Your Company. All rights reserved.
+          © {new Date().getFullYear()} Oleva AG. All rights reserved.
         </div>
       </div>
     </div>
