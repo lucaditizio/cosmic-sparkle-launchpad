@@ -36,7 +36,7 @@ const NewsletterForm = () => {
         if (error.code === '23505') { // Unique violation
           toast({
             title: "Already subscribed",
-            description: "This email is already subscribed to our newsletter.",
+            description: "This email is already subscribed.",
           });
         } else {
           console.error("Supabase error:", error);
@@ -49,7 +49,7 @@ const NewsletterForm = () => {
       } else {
         toast({
           title: "Success!",
-          description: "Thank you for subscribing to our newsletter.",
+          description: "Thank you for subscribing. We'll inform you when we launch.",
         });
         setEmail('');
       }
