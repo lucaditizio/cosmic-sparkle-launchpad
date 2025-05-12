@@ -38,7 +38,7 @@ const Index = () => {
         
         {/* Subheading */}
         <p className="text-muted-foreground max-w-md mx-auto mb-10 text-lg">
-          We're building something amazing.  
+          We're building something amazing.{"\n"}
           Be the first to know when we launch.
         </p>
         
