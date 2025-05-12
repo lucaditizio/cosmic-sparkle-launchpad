@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
 import { ArrowRight } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 
 const NewsletterForm = () => {
   const [email, setEmail] = useState('');
@@ -24,15 +25,44 @@ const NewsletterForm = () => {
 
     setIsSubmitting(true);
     
-    // Simulate API call
-    setTimeout(() => {
+    try {
+      // Insert email into Supabase
+      const { error } = await supabase
+        .from('newsletter_subscriptions')
+        .insert([{ email }]);
+      
+      if (error) {
+        // Handle duplicate emails gracefully
+        if (error.code === '23505') { // Unique violation
+          toast({
+            title: "Already subscribed",
+            description: "This email is already subscribed to our newsletter.",
+          });
+        } else {
+          console.error("Supabase error:", error);
+          toast({
+            title: "Error",
+            description: "There was a problem subscribing you. Please try again.",
+            variant: "destructive",
+          });
+        }
+      } else {
+        toast({
+          title: "Success!",
+          description: "Thank you for subscribing to our newsletter.",
+        });
+        setEmail('');
+      }
+    } catch (err) {
+      console.error("Submission error:", err);
       toast({
-        title: "Success!",
-        description: "Thank you for subscribing to our newsletter.",
+        title: "Error",
+        description: "There was a problem subscribing you. Please try again.",
+        variant: "destructive",
       });
-      setEmail('');
+    } finally {
       setIsSubmitting(false);
-    }, 1000);
+    }
   };
 
   return (
